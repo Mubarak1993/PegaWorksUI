@@ -2,12 +2,15 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <meta http-equiv="Access-Control-Allow-Headers" content="*" />
+    <meta http-equiv="Access-Control-Allow-Methods" content="GET,POST,PUT" />
     <title>Login Page</title>
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script>
     $(document).ready(function () {
         $("#btnLogin").click(function () {
@@ -16,7 +19,7 @@
             var Password = $("#inputPassword").val();
             var User = { UserName: UserName, Password: Password};
 
-            if (UserName == '' ) {
+            if (UserName == '') {
                 alert("Please enter UserName");
             } else if (Password == '') {
                 alert("Please enter Password");
@@ -25,16 +28,19 @@
             }
             else {
                 $.ajax({
-                    url: "http://localhost:55071/PW/Login",
+                    url: "http://pegaworksapi.com:8080/PW/Login",
                     type: "POST",
+                    async: false,
                     crossDomain: true,
                     data: JSON.stringify(User),
+                    dataType: 'json',
                     contentType: 'application/json',
-                    success: function (responseData, status, xhr)
+                    success: function (responseData)
                     {
-                        alert(responseData);
+                        alert(User.UserName);
+                        alert(responseData.val);
                     },
-                    error: function (request, status, error) { alert('Invalid Login: ' + error); }
+                    error: function (jqXHR, textStatus, errorThrown) { alert(User.UserName + ' Invalid Login: ' + errorThrown); }
                 });
             }
             return false;
@@ -43,31 +49,31 @@
     </script>
 </head>
 <body>
-    <fieldset>
-        <legend>Login to PegaWorks</legend>
-        <div class="form-group">
-            <label for="inputUserName" class="col-lg-2 control-label">User Name</label>
-            <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputUserName" placeholder="User Name">
+        <fieldset>
+            <legend>Login to PegaWorks</legend>
+            <div class="form-group">
+                <label for="inputUserName" class="col-lg-2 control-label">User Name</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="inputUserName" placeholder="User Name">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-            <div class="col-lg-10">
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                <span class="help-block">Password should be minimun of 8 characters long</span>
+            <div class="form-group">
+                <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                <div class="col-lg-10">
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    <span class="help-block">Password should be minimun of 8 characters long</span>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
+            <div class="form-group">
 
-        </div>
-        <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                <button id="btnLogin" type="submit" class="btn btn-primary">Login</button>
-                <button type="reset" class="btn btn-default">Cancel</button>
             </div>
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        </div>
-    </fieldset>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button id="btnLogin" type="submit" class="btn btn-primary">Login</button>
+                    <button type="reset" class="btn btn-default">Cancel</button>
+                </div>
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            </div>
+        </fieldset>
 </body>
 </html>
