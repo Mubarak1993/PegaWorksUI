@@ -12,24 +12,34 @@
   
     <!--Added by Usha-->
     <script>
+        function getUrlVars() {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
         window.onload = function () {
             // Fetch logged in user info
-            //$.ajax({
-            //    type: 'GET',
-            //    url: 'http://pegaworksapi.com:8080/PW/GetSingleUser/'+,
-            //    dataType: 'json',
-            //    success: function (data) {
-
-            //        $.each(data, function (index, val) {
-            //            $('#jobs').append("<div class='col- 6 col- sm - 6 col- lg - 4'><h2>" + val.JobName + "</h2><p>" + val.JobDescription + "</p><p><a class='btn btn-default' href='#" + val.ID + "'>View details »</a></p></div>");
-            //        });
-            //    }
-            //}); 
+            var id = getUrlVars()['ID'];
+            $.ajax({
+                type: 'GET',
+                url: 'http://pegaworksapi.com:8080/PW/GetSingleUser/' + id,
+                dataType: 'json',
+                success: function (data) {
+                    $('#idUserName').text(data.UserName);
+                }
+            }); 
             // Jobs Tab
             $.ajax({
                 type: 'GET',
-                url: 'http://pegaworksapi.com:8080/Job/SearchJobs/',
+                url: 'http://192.168.2.25:8080/Job/SearchJobs/',
                 dataType: 'json',
+                crossDomain: true,
                 success: function (data) {
 
                     $.each(data, function (index, val) {
@@ -40,8 +50,9 @@
             // People tab
             $.ajax({
                 type: 'GET',
-                url: 'http://pegaworksapi.com:8080/PW/GetUsers/',
+                url: 'http://192.168.2.25:8080/PW/GetUsers/',
                 dataType: 'json',
+                crossDomain: true,
                 success: function (data) {
 
                     $.each(data, function (index, val) {
@@ -67,7 +78,7 @@
         <div class="collapse navbar-collapse navbar-right" id="menu"> 
             <ul class="nav navbar-nav navbar-right">
                 
-                <li><a href="#UserProfile.html"><span class="glyphicon glyphicon-log-in"></span> &nbsp; #UserName</a></li>
+                <li ><a id="idUserName" href="#UserProfile.html"><span class="glyphicon glyphicon-user"></span> &nbsp; #username</a></li>
                 <!--<li><a href="signup.html" ><span class="glyphicon glyphicon-user"></span> &nbsp; Sign Up</a></li>-->
 				<li><a href="#sign_out"><span class="glyphicon glyphicon-log-out"></span> &nbsp; Sign Out</a></li>
             </ul>
@@ -82,6 +93,8 @@
                 <ul class="nav">
                     <li class="active"><a href="#">Apply Jobs</a></li>
                     <li><a href="#">Post Jobs</a></li>
+                    <li><a href="#">View Jobs Applied</a></li>
+                    <li><a href="#">View Jobs Posted</a></li>
                 </ul>
             </div>
         </div>

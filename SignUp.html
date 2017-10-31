@@ -28,14 +28,14 @@
                     }
                     else {
                         $.ajax({
-                            url: "http://pegaworksapi.com:8080/PW/RegisterUser",
+                            url: "http://192.168.2.25:8080/PW/RegisterUser",
                             type: "POST",
                             crossDomain: true,
                             data: JSON.stringify(SignUpUser),
                             contentType: 'application/json',
                             success: function (responseData, status, xhr) {
                                 alert('User ' + Name + ' has been added successfully');
-                                window.location.href = "index.html";
+                                window.location.href = "index.html?ID=4";
                             },
                             error: function (responseData, status, error) { alert('Error: ' + responseData.responseText); }
                         });
