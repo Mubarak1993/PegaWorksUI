@@ -81,7 +81,7 @@ li {
   color: #ffffff;
 }
 
-.signin-active a {
+.signin:active a{
   padding-bottom: 10px;
   color: #ffffff;
   text-decoration: none;
@@ -91,7 +91,7 @@ li {
   cursor: pointer;
 }
 
-.signin-inactive a {
+.signin:inactive a{
   padding-bottom: 0;
   color: rgba(255,255,255,.3);
   text-decoration: none;
@@ -99,7 +99,7 @@ li {
   cursor: pointer;
 }
 
-.signup-active a {
+ .signup:active a {
   cursor: pointer;
   color: #ffffff;
   text-decoration: none;
@@ -107,14 +107,14 @@ li {
   padding-bottom: 10px;
 }
 
-.signup-inactive a {
+.signup:inactive a {
   cursor: pointer;
   color: rgba(255,255,255,.3);
   text-decoration: none;
   -webkit-transition: all .25s ease;
   transition: all .25s ease;
 }
-
+ 
 .form-signin {
   width: 430px;
   height: 375px;
