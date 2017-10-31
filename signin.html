@@ -25,7 +25,7 @@
                     }
                     else {
                         $.ajax({
-                            url: "http://pegaworksapi.com:8080/PW/Login",
+                            url: "http://192.168.2.25:8080/PW/Login",
                             type: "POST",
                             async: false,
                             crossDomain: true,
@@ -35,7 +35,7 @@
                             success: function (responseData) {
                                 alert(responseData);
                                 if (responseData == "Login Success")
-                                { window.location.href = "index.html"; }
+                                { window.location.href = "index.html?ID=4"; }
                             },
                             error: function (jqXHR, textStatus, errorThrown) { alert(User.UserName + ' Invalid Login: ' + errorThrown); }
                         });
